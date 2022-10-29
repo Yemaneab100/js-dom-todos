@@ -42,8 +42,7 @@ const state = {
       const btnDelete = document.createElement('button');
       btnDelete.innerText = "Delete";
       btnDelete.classList.add('delete')
-      
-
+    
       if(todo.completed){
         const del = document.createElement('del');
         li.setAttribute('style', 'color:grey;')
@@ -78,12 +77,11 @@ const state = {
 
   function updateTodos(todo){
     fetch(`${uri}/${todo.id}`, {
-      method: 'PUT',
+      method: 'PATCH',
       headers: {
           'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "title": todo.title,
         "completed": true
       })
   }).then(res => res.json())

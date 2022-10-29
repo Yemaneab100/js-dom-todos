@@ -3,7 +3,7 @@
     {
       "id": 3,
       "title": "Fix the gutters",
-      "completed": false
+      "completed": true
     },
     {
       "title": "Attend Class",
@@ -12,7 +12,7 @@
     },
     {
       "title": "Attend Class",
-      "completed": false,
+      "completed": true,
       "id": 6
     },
     {
