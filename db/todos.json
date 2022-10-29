@@ -1,16 +1,6 @@
 {
   "todos": [
     {
-      "title": "Feed the cat",
-      "completed": false,
-      "id": 1
-    },
-    {
-      "id": 2,
-      "title": "Cut the grass",
-      "completed": true
-    },
-    {
       "id": 3,
       "title": "Fix the gutters",
       "completed": false
@@ -41,32 +31,8 @@
       "id": 13
     },
     {
-      "title": "get job",
-      "completed": false,
+      "title": "come home",
       "id": 14
-    },
-    {
-      "title": "come home",
-      "completed": true,
-      "id": 15
-    },
-    {
-      "title": "come home",
-      "completed": true,
-      "id": 16
-    },
-    {
-      "title": "come home",
-      "id": 17
-    },
-    {
-      "title": "come home",
-      "id": 18
-    },
-    {
-      "title": "come home",
-      "id": 19
     }
-    
   ]
 }

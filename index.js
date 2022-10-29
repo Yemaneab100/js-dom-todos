@@ -32,8 +32,18 @@ const state = {
     // clear the existing todos
     todosListUL.innerHTML = "";
     // render them again
+    createTodoLists()
+  }
+
+  // creat appropraite List
+  function createTodoLists(){
     state.todos.forEach((todo) => {
       const li = document.createElement("li");
+      const btnDelete = document.createElement('button');
+      btnDelete.innerText = "Delete";
+      btnDelete.classList.add('delete')
+      
+
       if(todo.completed){
         const del = document.createElement('del');
         li.setAttribute('style', 'color:grey;')
@@ -49,31 +59,51 @@ const state = {
         li.appendChild(btnComplete);
 
         btnComplete.addEventListener('click', () =>{
-          fetch(`${uri}/${todo.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              "title": todo.title,
-              "completed": true
-            })
-        }).then(res => res.json())
-        location.reload();
-        
+          updateTodos(todo)
         })
         
       }
+
+      btnDelete.addEventListener('click',() => {
+        deletTodos(todo)
+        
+      })
+
+      li.appendChild(btnDelete);
       todosListUL.appendChild(li); 
      
     });
   }
-
   // update complete 
 
-  // function updateTodos(todo){
-  //   fetch(uri, )
-  // }
+  function updateTodos(todo){
+    fetch(`${uri}/${todo.id}`, {
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "title": todo.title,
+        "completed": true
+      })
+  }).then(res => res.json())
+  location.reload() 
+  .catch(error => console.log(error));
+
+  }
+
+  // Delete todos
+  function deletTodos(todo){
+    fetch(`${uri}/${todo.id}`, {
+      method: 'DELETE',
+      headers: {
+          'Content-Type': 'application/json'
+      }  
+  }).then(res => res.json())
+    .catch(error => console.log(error));
+
+  location.reload();
+  }
   
   // GET ALL todos
 function loadTodos() {
