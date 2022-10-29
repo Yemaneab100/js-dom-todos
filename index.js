@@ -1,13 +1,14 @@
 
 const todosListUL = document.querySelector("#todo-list");
 const formTodo = document.querySelector('form');
-
+ // the endpoint to GET ALL todos
+ const uri = "http://localhost:3000/todos";
 
 formTodo.addEventListener('submit', event => {
     event.preventDefault();
     const formData = new FormData(formTodo);
     const data = Object.fromEntries(formData);
-    const uri = "http://localhost:3000/todos";
+  
 
     fetch(uri, {
         method: 'POST',
@@ -20,12 +21,6 @@ formTodo.addEventListener('submit', event => {
    
       loadTodos()    
 });
-
-// const inputTodo = document.querySelector('input');
-// inputTodo.addEventListener('click', () => {
-//     loadTodos();
-// })
-
 
 // local state in the browser
 const state = {
@@ -40,8 +35,6 @@ const state = {
     state.todos.forEach((todo) => {
       const li = document.createElement("li");
       if(todo.completed){
-        // style="color:red;"
-        // <del>blue</del>
         const del = document.createElement('del');
         li.setAttribute('style', 'color:grey;')
         del.innerText = todo.title
@@ -50,19 +43,42 @@ const state = {
 
       else{
         li.innerText = todo.title
+        const btnComplete = document.createElement('button');
+        btnComplete.innerText = "Complete"
+        btnComplete.classList.add('complete')
+        li.appendChild(btnComplete);
+
+        btnComplete.addEventListener('click', () =>{
+          fetch(`${uri}/${todo.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              "title": todo.title,
+              "completed": true
+            })
+        }).then(res => res.json())
+        location.reload();
+        
+        })
+        
       }
-      
-      todosListUL.appendChild(li);
+      todosListUL.appendChild(li); 
+     
     });
   }
 
+  // update complete 
+
+  // function updateTodos(todo){
+  //   fetch(uri, )
+  // }
   
   // GET ALL todos
 function loadTodos() {
     console.log("Todo: GET todos/ from server");
-  
-    // the endpoint to GET ALL todos
-    const uri = "http://localhost:3000/todos";
+
     // default is to send GET request, so I don't need any options
     fetch(uri)
       .then((response) => {

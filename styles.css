@@ -11,3 +11,8 @@ body {
   text-decoration: line-through;
   color:grey;
 }
+
+.complete{
+  margin-left: 40px;
+}
+
